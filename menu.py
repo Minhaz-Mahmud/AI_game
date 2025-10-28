@@ -5,6 +5,10 @@ import pygame
 from PIL import Image, ImageTk, ImageSequence
 from two_player import open_multiplayer_board
 import os
+from fuzzy_logic import apply_fuzzy_logic
+from a_star import apply_a_star
+from mini_max import apply_mini_max_algorithm
+from ai_vs_ai import prompt_ai_selection
 
 # Initialize pygame for sound and animation
 pygame.init()
@@ -63,6 +67,23 @@ def prompt_player_names():
 
 def start_multiplayer():
     prompt_player_names()
+
+
+def select_difficulty(difficulty):
+    play_click_sound()
+    stop_background_sound()  # Stop background sound before opening the next GUI
+    print(f"Selected difficulty: {difficulty}")
+    if difficulty == "Easy":
+        root.withdraw()
+        apply_fuzzy_logic(root, "HUMAN", "ROBOT")
+
+    elif difficulty == "Medium":
+        root.withdraw()
+        apply_a_star(root, "HUMAN", "ROBOT")
+
+    elif difficulty == "Hard":
+        root.withdraw()
+        apply_mini_max_algorithm(root, "HUMAN", "ROBOT")
 
 # Function to animate the background
 def animate_background(canvas, image_sequence, image_index):
@@ -132,6 +153,35 @@ button_width = 20  # Reduced button width
 
 multiplayer_button = ttk.Button(root, text="TWO PLAYER", width=button_width, command=start_multiplayer)
 multiplayer_button_window = canvas.create_window(window_width/2, 170, window=multiplayer_button)
+
+# Create menu for Single button
+
+single_button = ttk.Button(root, text="SINGLE PLAYER", width=button_width)
+single_button_window = canvas.create_window(window_width/2, 270, window=single_button)
+
+
+single_menu = tk.Menu(root, tearoff=0)
+for difficulty in ["Easy", "Medium", "Hard"]:
+    single_menu.add_command(label=difficulty, command=lambda d=difficulty: select_difficulty(d))
+
+# In your menu section, add the AI vs AI button after the single player button:
+ai_battle_button = ttk.Button(root, text="AI VS AI", width=button_width, command=lambda: prompt_ai_selection(root))
+ai_battle_button_window = canvas.create_window(window_width/2, 370, window=ai_battle_button)
+
+def show_single_menu(event):
+    play_click_sound()
+    single_menu.post(event.x_root, event.y_root)
+
+single_button.bind("<Button-1>", show_single_menu)
+
+# Hide menu when clicking outside
+def hide_single_menu(event):
+    if not single_menu.winfo_ismapped():
+        return
+    if event.widget is not single_button:
+        single_menu.unpost()
+
+root.bind("<Button-1>", hide_single_menu)
 
 
 # Start the Tkinter main loop

@@ -72,7 +72,7 @@ def open_multiplayer_board(root_window, p1, p2):
 
     update_scoreboard(scoreboard_frame, player1, player2)
 
-    board_size = 8
+    board_size = 7
     board = [['' for _ in range(board_size)] for _ in range(board_size)]
 
     # Load static images instead of GIF frames
