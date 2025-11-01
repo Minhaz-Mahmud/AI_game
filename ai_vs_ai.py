@@ -213,11 +213,11 @@ def check_game_end(board, canvas):
     """Check if game is over"""
     if all(cell != '' for row in board for cell in row):
         if player1_score > player2_score:
-            winner = "Agent 1 🎉"
+            winner = "Agent 1 "
         elif player2_score > player1_score:
-            winner = "Agent 2 🏆"
+            winner = "Agent 2 "
         else:
-            winner = "It's a tie! 😮"
+            winner = "It's a tie! "
         
         try:
             pygame.mixer.music.load("resources/music/winner.mp3")
@@ -297,7 +297,7 @@ def prompt_ai_selection(root):
     screen_height = root.winfo_screenheight()
     center_x = int(screen_width / 2 - window_width / 2)
     center_y = int(screen_height / 2 - window_height / 2)
-    board_window.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
+    board_window.geometry(f'{window_width}x{window_height}+{center_x}+{center_y-33}')
     board_window.resizable(False, False)
     
     # Styles
@@ -343,7 +343,7 @@ def prompt_ai_selection(root):
     
     # Control buttons
     ctrl_frame = ttk.Frame(main_frame)
-    ctrl_frame.grid(row=1, column=1, padx=(10, 20), pady=10)
+    ctrl_frame.grid(row=1, column=1, padx=(10, 20), pady=5)
     
     def toggle_pause():
         global game_paused

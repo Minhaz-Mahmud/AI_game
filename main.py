@@ -11,7 +11,6 @@ board = []
 player1 = "Player 1"
 player2 = "Player 2"
 
-global player1_score, player2_score
 player1_score = 0
 player2_score = 0
 
@@ -106,6 +105,7 @@ def handle_click(event, row, col, board, buttons, circle_image, square_image, pl
 
 
 def check_winner(row, col, char, board, buttons, player_turn, board_window, update_scoreboard, root):
+    #it checks the who have done a score menas wins a point
     global player1_score, player2_score
 
     found_sos, sos_positions, sos_count = check_sos(board, row, col)
@@ -136,13 +136,13 @@ def check_game_end(board, scoreboard_frame, player1_score, player2_score, board_
         print(player2_score)
         if player1_score > player2_score:
             winner = player1
-            emoji = "🎉🎊"
+            emoji = ""
         elif player2_score > player1_score:
             winner = player2
-            emoji = "🏆🥳"
+            emoji = ""
         else:
             winner = "No one, it's a tie!"
-            emoji = "😮😅"
+            emoji = ""
 
         pygame.mixer.music.stop()
         pygame.mixer.music.load("resources/music/winner.mp3")
@@ -369,13 +369,13 @@ def print_board(board):
 #         print(player2_score)
 #         if player1_score > player2_score:
 #             winner = player1
-#             emoji = "🎉🎊"
+#             emoji = ""
 #         elif player2_score > player1_score:
 #             winner = player2
-#             emoji = "🏆🥳"
+#             emoji = ""
 #         else:
 #             winner = "No one, it's a tie!"
-#             emoji = "😮😅"
+#             emoji = ""
 
 #         pygame.mixer.music.stop()
 #         pygame.mixer.music.load("resources/music/winner.mp3")
@@ -606,13 +606,13 @@ def print_board(board):
 #         print(player2_score)
 #         if player1_score > player2_score:
 #             winner = player1
-#             emoji = "🎉🎊"
+#             emoji = ""
 #         elif player2_score > player1_score:
 #             winner = player2
-#             emoji = "🏆🥳"
+#             emoji = ""
 #         else:
 #             winner = "No one, it's a tie!"
-#             emoji = "😮😅"
+#             emoji = ""
 
 #         pygame.mixer.music.stop()
 #         pygame.mixer.music.load("resources/music/winner.mp3")
