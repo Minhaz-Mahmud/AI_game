@@ -164,9 +164,7 @@ single_menu = tk.Menu(root, tearoff=0)
 for difficulty in ["Easy", "Medium", "Hard"]:
     single_menu.add_command(label=difficulty, command=lambda d=difficulty: select_difficulty(d))
 
-#AI vs AI button after the single player button:
-ai_battle_button = ttk.Button(root, text="AI VS AI", width=button_width, command=lambda: prompt_ai_selection(root))
-ai_battle_button_window = canvas.create_window(window_width/2, 370, window=ai_battle_button)
+
 
 def show_single_menu(event):
     play_click_sound()
