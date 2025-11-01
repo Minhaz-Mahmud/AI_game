@@ -158,6 +158,21 @@ def agent_1_move(board):
     else:
         print("Agent 1 using: MiniMax")
         return minimax_move(board)
+# AGENT 2: Rotates through algorithms
+def agent_2_move(board):
+    """Rotation-based: cycles through all 3"""
+    empty = sum(1 for row in board for cell in row if cell == '')
+    choice = empty % 3
+    
+    if choice == 0:
+        print("Agent 2 using: Fuzzy Logic")
+        return fuzzy_move(board)
+    elif choice == 1:
+        print("Agent 2 using: A* Search")
+        return astar_move(board)
+    else:
+        print("Agent 2 using: MiniMax")
+        return minimax_move(board)
 
 
 
